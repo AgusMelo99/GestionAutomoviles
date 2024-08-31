@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(25, 34, 33);
+}
+
+body{
+    background: linear-gradient(rgb(7, 79, 193), 60%, rgb(175, 238, 255));
+    height: 100vh;
+}
+
+header{
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.789), 60%, rgba(0, 0, 0, 0));
+}
+
+li{
+    display: inline;
+}
+
+footer{
+    height: 5vh;
+    position: fixed; 
+    bottom: 0;
+}

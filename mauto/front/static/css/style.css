@@ -29,6 +29,8 @@ header {
 
 .navbar-brand {
     font-size: 24px;
+    color: white; 
+    text-decoration: none; 
 }
 
 .navbar-nav {
@@ -37,7 +39,7 @@ header {
 }
 
 .navbar-nav li {
-    margin-left: 40px;
+    margin-left: 20px;
 }
 
 .navbar-nav a {
@@ -52,17 +54,19 @@ header {
 
 main {
     padding: 40px; 
-    max-width: 1200px;
-    margin: 60px auto 20px auto; 
-    background-color: #333; 
+    max-width: 600px;  
+    margin: 60px auto; 
+    background-color: #0056b3; 
     color: white; 
-    border-radius: 5px;
+    border-radius: 8px; /*bordes redondeados*/
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);  
 }
+ 
 
 h1 {
-    font-size: 28px;
-    margin-bottom: 15px;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px; /* espacio abajo del título */
 }
 
 form {
@@ -70,10 +74,15 @@ form {
     flex-direction: column;
 }
 
+form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
 form input[type="text"],
 form input[type="email"], 
 form input[type="password"] {
-    margin-bottom: 15px; 
+    margin-bottom: 20px; 
     padding: 15px; 
     border: 1px solid #ddd;
     border-radius: 8px; 
@@ -83,7 +92,7 @@ form input[type="password"] {
 }
 
 form button {
-    background-color: #0056b3;
+    background-color: #053e77;
     color: white;
     border: none;
     padding: 15px 20px; 

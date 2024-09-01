@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Mauto</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <a href="index.html" class="navbar-brand">Mauto</a>
+            <a href="{{ url_for('index') }}" class="navbar-brand">Mauto</a>
             <ul class="navbar-nav">
-                <li><a href="inicio.html">Iniciar sesión</a></li>
-                <li><a href="registro.html">Registrarse</a></li>
+                <li><a href="{{ url_for('inicio') }}">Iniciar sesión</a></li>
+                <li><a href="{{ url_for('registro') }}">Registrarse</a></li>
             </ul>
         </nav>
     </header>

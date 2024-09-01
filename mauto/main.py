@@ -1,6 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
+
+from database import crear_usuario, init_app
+
+from werkzeug.security import generate_password_hash
+
+from config import Config
 
 app = Flask(__name__, template_folder='front/html', static_folder='front/static')
+app.config.from_object(Config)
+ 
+# Inicialización de la base de datos MySQL
+init_app(app)
 
 @app.route('/')
 def index():
@@ -22,9 +32,13 @@ def registro():
         nombre = request.form['nombre']
         apellido = request.form['apellido']
         email = request.form['email']
-        contraseña = request.form['contraseña']
+        contraseña = generate_password_hash(request.form['contraseña'])
         #lógica de registro
         #lo mismo que en def inicio pero con registro
+
+        crear_usuario(nombre, apellido, email, contraseña)
+        flash('Usuario registrado exitosamente', 'success')
+
         return redirect(url_for('index'))
     return render_template('registro.html')
 

@@ -1,30 +1,107 @@
-*{
+/* Reset básico para asegurar consistencia */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(25, 34, 33);
 }
 
-body{
-    background: linear-gradient(rgb(7, 79, 193), 60%, rgb(175, 238, 255));
-    height: 100vh;
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    background-image: url('fondo.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-header{
-    height: 10vh;
+header {
+    background-color: #0056b3;
+    color: white;
+}
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.789), 60%, rgba(0, 0, 0, 0));
+    padding: 15px 20px;
 }
 
-li{
-    display: inline;
+.navbar-brand {
+    font-size: 24px;
 }
 
-footer{
-    height: 5vh;
-    position: fixed; 
+.navbar-nav {
+    list-style: none;
+    display: flex;
+}
+
+.navbar-nav li {
+    margin-left: 40px;
+}
+
+.navbar-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar-nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 40px; 
+    max-width: 1200px;
+    margin: 60px auto 20px auto; 
+    background-color: #333; 
+    color: white; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);  
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input[type="text"],
+form input[type="email"], 
+form input[type="password"] {
+    margin-bottom: 15px; 
+    padding: 15px; 
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+    font-size: 16px; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+form button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 15px 20px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    font-size: 16px; 
+}
+
+form button:hover {
+    background-color: #004494;
+}
+
+footer {
+    background-color: #0056b3;
+    color: white;
+    text-align: center;
+    padding: 15px; 
+    position: fixed;
     bottom: 0;
+    width: 100%;
 }

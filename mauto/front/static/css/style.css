@@ -9,7 +9,7 @@ body {
     font-family: 'Arial', sans-serif;
     color: #333;
     background-color: #f4f4f4;
-    background-image: url('fondo.jpg'); 
+    background-image: url('../images/fondo.jpg'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

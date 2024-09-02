@@ -20,9 +20,9 @@ def index():
 def inicio():
     if request.method == 'POST':
         email = request.form['email']
-        contraseña = request.form['contraseña']
+        contrasena = request.form['contrasena']
         #lógica de autenticación
-        #se guardan las variables mail y contraseña asi las usamos en la DB
+        #se guardan las variables mail y contrasena asi las usamos en la DB
         return redirect(url_for('index'))
     return render_template('inicio.html')
 
@@ -32,11 +32,11 @@ def registro():
         nombre = request.form['nombre']
         apellido = request.form['apellido']
         email = request.form['email']
-        contraseña = generate_password_hash(request.form['contraseña'])
+        contrasena = generate_password_hash(request.form['contrasena'])
         #lógica de registro
         #lo mismo que en def inicio pero con registro
 
-        crear_usuario(nombre, apellido, email, contraseña)
+        crear_usuario(nombre, apellido, email, contrasena)
         flash('Usuario registrado exitosamente', 'success')
 
         return redirect(url_for('index'))

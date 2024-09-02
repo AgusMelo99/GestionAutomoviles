@@ -61,14 +61,22 @@ class ConexionBD:
         self.cur.close()
 
     def cargar_auto(self, modelo, patente, usuario):
-        self.cur = self.mydb.cursor("INSERT INNTO automoviles(modelo, patente, usuario) VALUES (%s, %s, %s)",
+        self.cur = self.mydb.cursor()
+        self.cur.execute("INSERT INNTO automoviles(modelo, patente, usuario) VALUES (%s, %s, %s)",
             (modelo, patente, usuario))
         self.mydb.commit()
         self.cur.close()
 
     def cargar_mantenimiento(self, control, fecha, prox_control, auto):
-        self.cur = self.mydb.cursor("INSERT INNTO mantenimientos(control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)",
+        self.cur = self.mydb.cursor()
+        self.cur.execute("INSERT INNTO mantenimientos(control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)",
             (control, fecha, prox_control, auto))
         self.mydb.commit()
         self.cur.close()
 
+    #metodos READ
+    def consultar_usuario(self, email):
+        self.cur = self.mydb.cursor()
+        self.cur.execute(f'SELECT * FROM usuarios WHERE email = {email}')
+        return self.cur.fetchone
+        

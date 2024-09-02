@@ -1,33 +1,74 @@
-from flask_mysqldb import MySQL
+import mysql.connector as db
+import mysql.connector.errorcode
 
-mysql = MySQL()
+class ConexionBD:
 
+    def __init__(self, host, port, user, password, database):
+        self.mydb = db.connect(host= host, port= port, user= user, password= password)
 
-"""
-    Configura y conecta la aplicación Flask con la base de datos MySQL. 
-    :param app: La instancia de la aplicación Flask.
-"""
-def init_app(app):
-    app.config['MYSQL_HOST'] = 'localhost'
-    app.config['MYSQL_PORT'] = 3306
-    app.config['MYSQL_USER'] = 'root'
-    app.config['MYSQL_PASSWORD'] = 'admin'
-    app.config['MYSQL_DB'] = 'mauto'
-    mysql.init_app(app)
+        self.cur = self.mydb.cursor()
 
+        try: #seleccionamos la base de datos a usar
+            self.cur.execute(f"USE {database}")
+        except db.Error as err: #si no lo encuentra, lo creamos
+            if err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
+                self.cur.execute(f"CREATE DATABASE {database}")
+                self.mydb.database = database
+            else:
+                raise err
 
+        #creamos la tabla de usuarios
+        self.cur.execute('''CREATE TABLE IF NOT EXISTS usuarios(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            nombre VARCHAR(30) NOT NULL,
+            apellido VARCHAR(30) NOT NULL,
+            email VARCHAR(50) NOT NULL,
+            contrasena VARCHAR(90) NOT NULL
+            )''')
+        
+        self.mydb.commit()
 
+        #creamos la table de autos
+        self.cur.execute('''CREATE TABLE IF NOT EXISTS automoviles(
+            id_auto INT AUTO_INCREMENT PRIMARY KEY,
+            modelo VARCHAR(30) NOT NULL,
+            patente VARCHAR(10) NOT NULL,
+            dueno INT NOT NULL,
+            FOREIGN KEY (dueno) REFERENCES usuarios(id)
+            )''')
+        
+        self.mydb.commit()
 
-"""
-    Inserta un nuevo usuario en la base de datos MySQL.
-    :param nombre: Nombre del usuario.
-    :param apellido: Apellido del usuario.
-    :param email: Correo electrónico del usuario.
-    :param contrasena_hash: Contraseña encriptada del usuario.
-"""
-def crear_usuario(nombre, apellido, email, contrasena_hash):
-    cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO usuarios(nombre, apellido, email, contrasena) VALUES (%s, %s, %s, %s)", 
-                (nombre, apellido, email, contrasena_hash))
-    mysql.connection.commit()
-    cur.close()
+        #creamos la tabla de mantenimientos
+        self.cur.execute('''CREATE TABLE IF NOT EXISTS manntenimientos(
+            id_control INT AUTO_INCREMENT PRIMARY KEY,
+            control VARCHAR(100) NOT NULL,
+            fecha DATE NOT NULL,
+            prox_control DATE,
+            auto INT NOT NULL,
+            FOREIGN KEY (auto) REFERENCES automoviles(id_auto)
+            )''')
+        
+        self.mydb.commit()
+        self.cur.close()
+
+    #metodos CREATE
+    def crear_usuario(self, nombre, apellido, email, contrasena):
+        self.cur = self.mydb.cursor()
+        self.cur.execute("INSERT INTO usuarios(nombre, apellido, email, contrasena) VALUES (%s, %s, %s, %s)", 
+            (nombre, apellido, email, contrasena))
+        self.mydb.commit()
+        self.cur.close()
+
+    def cargar_auto(self, modelo, patente, usuario):
+        self.cur = self.mydb.cursor("INSERT INNTO automoviles(modelo, patente, usuario) VALUES (%s, %s, %s)",
+            (modelo, patente, usuario))
+        self.mydb.commit()
+        self.cur.close()
+
+    def cargar_mantenimiento(self, control, fecha, prox_control, auto):
+        self.cur = self.mydb.cursor("INSERT INNTO mantenimientos(control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)",
+            (control, fecha, prox_control, auto))
+        self.mydb.commit()
+        self.cur.close()
+

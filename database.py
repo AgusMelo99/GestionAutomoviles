@@ -40,7 +40,7 @@ class ConexionBD:
         self.mydb.commit()
 
         #creamos la tabla de mantenimientos
-        self.cur.execute('''CREATE TABLE IF NOT EXISTS manntenimientos(
+        self.cur.execute('''CREATE TABLE IF NOT EXISTS mantenimientos(
             id_control INT AUTO_INCREMENT PRIMARY KEY,
             control VARCHAR(100) NOT NULL,
             fecha DATE NOT NULL,
@@ -50,33 +50,38 @@ class ConexionBD:
             )''')
         
         self.mydb.commit()
+
         self.cur.close()
+        self.cur = self.mydb.cursor(dictionary=True)
 
     #metodos CREATE
     def crear_usuario(self, nombre, apellido, email, contrasena):
-        self.cur = self.mydb.cursor()
         self.cur.execute("INSERT INTO usuarios(nombre, apellido, email, contrasena) VALUES (%s, %s, %s, %s)", 
             (nombre, apellido, email, contrasena))
         self.mydb.commit()
-        self.cur.close()
 
     def cargar_auto(self, modelo, patente, usuario):
-        self.cur = self.mydb.cursor()
         self.cur.execute("INSERT INNTO automoviles(modelo, patente, usuario) VALUES (%s, %s, %s)",
             (modelo, patente, usuario))
         self.mydb.commit()
-        self.cur.close()
 
     def cargar_mantenimiento(self, control, fecha, prox_control, auto):
-        self.cur = self.mydb.cursor()
         self.cur.execute("INSERT INNTO mantenimientos(control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)",
             (control, fecha, prox_control, auto))
         self.mydb.commit()
-        self.cur.close()
 
     #metodos READ
     def consultar_usuario(self, email):
-        self.cur = self.mydb.cursor()
         self.cur.execute(f'SELECT * FROM usuarios WHERE email = {email}')
         return self.cur.fetchone
-        
+
+    def consultar_autos(self, usuario):
+        self.cur.execute(f'SELECT * FROM autos WHERE dueno = {usuario}')
+        return self.cur.fetchall
+    
+    def consultar_controles(self, auto):
+        self.cur.execute(f'SELECT * FROM mantenimientos WHERE auto = {auto}')
+        return self.cur.fetchall
+    
+    #metodos UPDATE
+    

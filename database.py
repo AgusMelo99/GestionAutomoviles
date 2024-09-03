@@ -72,8 +72,8 @@ class ConexionBD:
 
     #metodos READ
     def consultar_usuario(self, email):
-        self.cur.execute(f'SELECT * FROM usuarios WHERE email = {email}')
-        return self.cur.fetchone
+        self.cur.execute('SELECT * FROM usuarios WHERE email = %s', (email,))
+        return self.cur.fetchone()
 
     def consultar_autos(self, usuario):
         self.cur.execute(f'SELECT * FROM autos WHERE dueno = {usuario}')

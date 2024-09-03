@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from config import Config
 
@@ -17,6 +17,9 @@ db = ConexionBD(Config.MYSQL_HOST,
                 Config.MYSQL_PASSWORD,
                 Config.MYSQL_DB)
 
+# Configurar la clave secreta
+app.config['SECRET_KEY'] = Config.SECRET_KEY
+
 #ruta de pagina principal
 @app.route('/')
 def index():
@@ -27,10 +30,30 @@ def index():
 def inicio():
     if request.method == 'GET':
         return render_template('inicio.html')
+    
     email = str(request.form['email'])
     contrasena = str(request.form['contrasena'])
 
-    #falta la logica para autenticar
+    # Verifica si se han completado todos los campos del formulario
+    if not email or not contrasena:
+        flash('Por favor, complete todos los campos', 'error')
+        return redirect(url_for('inicio'))
+    
+    # Consulta el usuario en la base de datos usando el email proporcionado
+    usuario = db.consultar_usuario(email)
+    print(f"Usuario encontrado: {usuario}")  # Debugging
+    
+    # Verificar la contraseña
+    if usuario and check_password_hash(usuario['contrasena'], contrasena):
+        # Contraseña correcta, redirigir al usuario a la página principal
+        flash('Inicio de sesión exitoso', 'success')
+        return redirect(url_for('index'))
+        
+    else:
+        # Autenticación fallida
+        flash('Email o contraseña incorrectos', 'error')
+        return redirect(url_for('inicio'))
+    
 
 #ruta para registrar cuenta
 @app.route('/registro', methods=['GET', 'POST'])

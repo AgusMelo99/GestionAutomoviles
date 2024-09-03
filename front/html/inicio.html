@@ -3,37 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleIniciarSesion.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet"> 
     <title>Mauto</title>
 </head>
 <body>
     <header>
-        <nav class="navbar">
-            <a href="{{ url_for('index') }}" class="navbar-brand">Mauto</a>
-            <ul class="navbar-nav">
-                <li><a href="inicio">Iniciar sesión</a></li>
-                <li><a href="registro">Registrarse</a></li>
-            </ul>
-        </nav>
+            <a href="{{ url_for('index') }}">
+                <img class="logo" src="../static/images/logo-home.png">
+            </a>
+            
     </header>
     
     <main>
-        <h1>Inicie sesion</h1>
-
-        <form action="{{ url_for('inicio') }}" method="POST">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Email" required><br>
-
-            <label for="contraseña">Contraseña</label>
-            <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required><br>
-
-            <button type="submit">Iniciar sesión</button>
-        </form>
-    </main>
-
-    <footer>
-        <p>Desarrollado por el grupo 7</p>
-    </footer>
-
-</body>
-</html>
+        <main>
+            <form>
+            <h2>Inicie sesion</h2>
+    
+            <fieldset>
+                <div class="form_input">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="email@ejemplo.com" required>
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+                </div>
+            </fieldset>
+    
+                <div class="form_submit">
+                    <button class="submit_button" type="submit">Iniciar sesión</button>
+                </div>
+            </form>
+        </main>
+    </body>
+    </html>

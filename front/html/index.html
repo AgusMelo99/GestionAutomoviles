@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleIndex.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet"> 
     <title>Mauto</title>
 </head>
 <body>
-    <header>
+   <header>
         <nav class="navbar">
-            <a href="{{ url_for('index') }}" class="navbar-brand">Mauto</a>
+            <a  class="logo" href="{{ url_for('index') }}">
+                <img class="logo" src="../static/images/logo-home.png">
+            </a>
             <ul class="navbar-nav">
                 <li><a href="{{ url_for('inicio') }}">Iniciar sesión</a></li>
                 <li><a href="{{ url_for('registro') }}">Registrarse</a></li>
@@ -18,12 +23,25 @@
     </header>
     
     <main>
-        <h1>¡BIENVENIDO A MAUTO!</h1>
-        <p>Presentamos esta herramienta para que puedas mantener en un solo lugar todo lo que necesitas para mantenerte informado sobre la condición de tu auto y lo que necesita para que esté de 10.</p>
+        <div class="card">
+            <h1 class="card_title">Bienvenido a<span> MAUTO</span></h1>
+            <p class="card_content">Un software diseñado para simplificar la gestión de los controles de tu automóvil en un solo lugar y accesible desde cualquier dispositivo.</p>
+        </div>
+    <!--
+        <section class="about-section">
+        <h2>¿Cómo Funciona MAUTO?</h2>
+        <p class="about-content">MAUTO permite a los usuarios registrar y gestionar el mantenimiento de sus vehículos fácilmente. Con nuestra plataforma, puedes programar recordatorios de servicios, llevar un registro de cambios de aceite, revisiones técnicas, y más. Además, nuestra aplicación está disponible en múltiples dispositivos, lo que significa que puedes gestionar tu vehículo desde cualquier lugar, en cualquier momento.</p>
+        <p class="about-content">Con una interfaz intuitiva y herramientas potentes, MAUTO es tu compañero ideal para mantener tu vehículo en óptimas condiciones sin complicaciones.</p>
+        </section>
+    -->
     </main>
 
-    <footer>
-        <p>Desarrollado por el grupo 7</p>
+    <footer class="footer">
+        <div class="footer-section">
+            <h2>Sobre Nosotros</h2>
+            <p>Desarrollado por el grupo 7</p>
+        </div>
     </footer>
+
 </body>
 </html>

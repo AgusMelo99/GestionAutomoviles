@@ -18,6 +18,11 @@ body::before {
     z-index: -1; /* Coloca la capa por detrás del contenido */
 }
 
+header {
+    text-align: center;
+    padding: 20px;
+}
+
 .logo {
     width: 140px;
     filter: drop-shadow(8px 8px 5px white);
@@ -25,6 +30,7 @@ body::before {
 
 main {
     color: white;
+    padding: 20px;
 }
 
 h2 {
@@ -38,9 +44,8 @@ h2 {
 }
 
 form {
-    
     background-color: #0009;
-    padding: 40px 0;
+    padding: 40px 20px;
     max-width: 600px;
     margin: auto;
     box-shadow: 0px 0px 55px #fff2;
@@ -63,10 +68,12 @@ input {
     color: #eee;
     font-size: 16px;
 }
+
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px rgba(15, 14, 14, 0.5) inset; 
     -webkit-text-fill-color: #eee; 
 }
+
 label {
     font-family: "SUSE", sans-serif; 
     font-size: 1em;
@@ -83,17 +90,18 @@ fieldset {
 legend {
     padding: 0 6px;
     color: #777f;
-  }
+}
 
 .form_submit {
-    padding: 4px 150px;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .submit_button {
     width: 200px;
     height: 50px;
-    background-color:rgb(74, 73, 73);
-    color:white;
+    background-color: rgb(74, 73, 73);
+    color: white;
     border: none;
     border-radius: 4px;
     font-family: 'SUSE', sans-serif;
@@ -101,8 +109,41 @@ legend {
     cursor: pointer;
     transition: background-color 0.3s ease;
     display: block; 
-    margin: 20px auto; 
+    margin: 0 auto; 
 }
+
 .submit_button:hover {
-    background-color: #ee4040; /* Cambia el color de fondo al pasar el mouse */
+    background-color: #ee4040;
+}
+
+/* Media Queries responsive */
+@media (max-width: 768px) { /* tablets y teléfonos */
+    form {
+        width: 90%; 
+        padding: 20px; 
+    }
+
+    h2 {
+        font-size: 1.5em; 
+    }
+
+    .submit_button {
+        width: 90%;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) { /* dispositivos más pequeños */
+    form {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.2em; 
+    }
+
+    .submit_button {
+        width: 100%;
+        font-size: 12px;
+    }
 }

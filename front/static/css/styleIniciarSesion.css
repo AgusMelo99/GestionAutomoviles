@@ -19,12 +19,6 @@ body::before {
 }
 
 
-header {
-    display: flex; 
-    justify-content: flex-start; 
-    align-items: center; 
-    padding: 15px 20px; 
-}
 .logo {
     width: 140px;
     filter: drop-shadow(8px 8px 5px white);

@@ -74,7 +74,7 @@ def registro():
     return redirect(url_for('index'))
 
 @app.route('/agregarAutomovil' ,methods=['GET','POST'])
-def AgregarAutomovil():
+def agregarAutomovil():
     if request.method == 'POST':
         marca = request.form.get('marca')
         modelo = request.form.get('modelo')
@@ -86,7 +86,7 @@ def AgregarAutomovil():
         return redirect(url_for('principal'))
     return render_template('agregarAutomovil.html')
 
-@app.route('principal')    
+@app.route('/principal')    
 def principal():
     return render_template('principal.html')
 

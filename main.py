@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -46,6 +46,7 @@ def inicio():
     # Verificar la contraseña
     if usuario and check_password_hash(usuario['contrasena'], contrasena):
         # Contraseña correcta, redirigir al usuario a la página principal
+        session['user_id'] = usuario['id']
         flash('Inicio de sesión exitoso', 'success')
         return redirect(url_for('principal'))
         
@@ -82,8 +83,21 @@ def agregarAutomovil():
         vin = request.form.get('vin')
         kilometraje = request.form.get('kilometraje')
         combustible = request.form.get('combustible')
+
         #logica de registro
+         # Obtener el ID del usuario desde la sesión
+        user_id = session.get('user_id')
+        
+        if user_id:
+            # Lógica de registro
+            db.cargar_auto(modelo, vin, user_id)
+            flash('Automóvil registrado exitosamente', 'success')
+        else:
+            flash('Debe iniciar sesión para registrar un automóvil', 'error')
+            return redirect(url_for('inicio'))
+        
         return redirect(url_for('principal'))
+    
     return render_template('agregarAutomovil.html')
 
 @app.route('/principal')    

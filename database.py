@@ -60,9 +60,9 @@ class ConexionBD:
             (nombre, apellido, email, contrasena))
         self.mydb.commit()
 
-    def cargar_auto(self, modelo, patente, usuario):
-        self.cur.execute("INSERT INNTO automoviles(modelo, patente, usuario) VALUES (%s, %s, %s)",
-            (modelo, patente, usuario))
+    def cargar_auto(self, modelo, patente, dueno):
+        self.cur.execute("INSERT INTO automoviles(modelo, patente, dueno) VALUES (%s, %s, %s)",
+            (modelo, patente, dueno))
         self.mydb.commit()
 
     def cargar_mantenimiento(self, control, fecha, prox_control, auto):

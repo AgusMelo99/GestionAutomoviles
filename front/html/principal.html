@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylePrincipal.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+    <title>Pantalla Principal - MAUTO</title>
+</head>
+<body>
+   <header>
+        <nav class="navbar">
+            <a href="{{ url_for('principal') }}">
+                <img class="logo" src="../static/images/logo-home.png">
+            </a>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="content-wrapper">
+            <div class="main-content">
+                <div class="card">
+                    <h1 class="card_title">Bienvenido a<span> MAUTO</span></h1>
+                    <p class="card_content">Gestiona el mantenimiento de tus vehículos fácilmente.</p>
+                </div>
+            </div>
+
+            <!-- mini menú lateral -->
+            <aside class="side-menu">
+                <ul>
+                    <li><a href="{{ url_for('agregarAutomovil')}}">Agregar Auto</a></li>
+                    <li><a >Notificaciones</a></li>
+                    <li><a href="{{ url_for('index')}}">Cerrar Sesión</a></li>
+                </ul>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-section">
+            <h2>Sobre Nosotros</h2>
+            <p>Desarrollado por el grupo 7</p>
+        </div>
+    </footer>
+</body>
+</html>

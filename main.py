@@ -47,7 +47,7 @@ def inicio():
     if usuario and check_password_hash(usuario['contrasena'], contrasena):
         # Contraseña correcta, redirigir al usuario a la página principal
         flash('Inicio de sesión exitoso', 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('principal'))
         
     else:
         # Autenticación fallida
@@ -72,6 +72,24 @@ def registro():
 
     flash('Usuario registrado exitosamente', 'success')
     return redirect(url_for('index'))
+
+@app.route('/agregarAutomovil' ,methods=['GET','POST'])
+def AgregarAutomovil():
+    if request.method == 'POST':
+        marca = request.form.get('marca')
+        modelo = request.form.get('modelo')
+        anio = request.form.get('anio')
+        vin = request.form.get('vin')
+        kilometraje = request.form.get('kilometraje')
+        combustible = request.form.get('combustible')
+        #logica de registro
+        return redirect(url_for('principal'))
+    return render_template('agregarAutomovil.html')
+
+@app.route('principal')    
+def principal():
+    return render_template('principal.html')
+
 
 #ejecucion de la app
 if __name__ == '__main__':

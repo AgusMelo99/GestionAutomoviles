@@ -4,8 +4,14 @@ import mysql.connector.errorcode
 class ConexionBD:
 
     def __init__(self, host, port, user, password, database):
-        self.mydb = db.connect(host= host, port= port, user= user, password= password)
 
+        self.host = host
+        self.port = port
+        self.user = user
+        self.password = password
+        self.database = database
+        
+        self.mydb = db.connect(host= self.host, port= self.port, user=self.user, password=self.password)
         self.cur = self.mydb.cursor()
 
         try: #seleccionamos la base de datos a usar
@@ -53,35 +59,64 @@ class ConexionBD:
 
         self.cur.close()
         self.cur = self.mydb.cursor(dictionary=True)
+    
+    def _open_connection(self):
+        self.mydb = db.connect(
+            host=self.host,
+            port=self.port,
+            user=self.user,
+            password=self.password,
+            database=self.database
+        )
+        self.cur = self.mydb.cursor(dictionary=True)
+
+    def _close_connection(self):
+        self.cur.close()
+        self.mydb.close()
 
     #metodos CREATE
     def crear_usuario(self, nombre, apellido, email, contrasena):
+        self._open_connection()
         self.cur.execute("INSERT INTO usuarios(nombre, apellido, email, contrasena) VALUES (%s, %s, %s, %s)", 
             (nombre, apellido, email, contrasena))
         self.mydb.commit()
+        self._close_connection()
 
     def cargar_auto(self, modelo, patente, dueno):
+        self._open_connection()
         self.cur.execute("INSERT INTO automoviles(modelo, patente, dueno) VALUES (%s, %s, %s)",
             (modelo, patente, dueno))
         self.mydb.commit()
+        self._close_connection()
 
     def cargar_mantenimiento(self, control, fecha, prox_control, auto):
+        self._open_connection()
         self.cur.execute("INSERT INNTO mantenimientos(control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)",
             (control, fecha, prox_control, auto))
         self.mydb.commit()
+        self._close_connection()
 
     #metodos READ
     def consultar_usuario(self, email):
+        self._open_connection()
         self.cur.execute('SELECT * FROM usuarios WHERE email = %s', (email,))
-        return self.cur.fetchone()
+        result = self.cur.fetchone()
+        self._close_connection()
+        return result
 
     def consultar_autos(self, usuario):
-        self.cur.execute(f'SELECT * FROM autos WHERE dueno = {usuario}')
-        return self.cur.fetchall
+        self._open_connection()
+        self.cur.execute('SELECT * FROM automoviles WHERE dueno = %s', (usuario,))
+        result = self.cur.fetchall()
+        self._close_connection()
+        return result
     
     def consultar_controles(self, auto):
-        self.cur.execute(f'SELECT * FROM mantenimientos WHERE auto = {auto}')
-        return self.cur.fetchall
+        self._open_connection()
+        self.cur.execute('SELECT * FROM mantenimientos WHERE auto = %s', (auto,))
+        result = self.cur.fetchall()
+        self._close_connection()
+        return result
     
-    #metodos UPDATE
+    #metodos UPDATE 
     

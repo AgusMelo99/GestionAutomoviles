@@ -104,6 +104,14 @@ def agregarAutomovil():
 def principal():
     return render_template('principal.html')
 
+@app.route('/misAutos')
+def index():
+    return render_template('misAutos.html')
+
+@app.route('/mantenimientos')
+def index():
+    return render_template('mantenimientos.html')
+
 
 #ejecucion de la app
 if __name__ == '__main__':

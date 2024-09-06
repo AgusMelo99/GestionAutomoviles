@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleMantenimientos.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+    <title>Mantenimientos - MAUTO</title>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('principal') }}">
+            <img class="logo" src="../static/images/logo-home.png">
+        </a>
+    </header>
+
+    <main>
+        <div class="filtros">
+            <!-- agregar más filtros por fecha, tipo, estado, etc. -->
+            <label for="filtro-tipo">Filtrar por tipo:</label>
+            <select id="filtro-tipo">
+                <option value="todos">Todos</option>
+                <option value="aceite">Cambio de Aceite</option>
+                <option value="frenos">Revisión de Frenos</option>
+                <option value="neumaticos">Cambio de Neumáticos</option>
+            </select>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- hardcodeado tambien -->
+                <tr>
+                    <td>2024-08-15</td>
+                    <td>Cambio de Aceite</td>
+                    <td>Completado</td>
+                    <td>
+                        <a href="#" class="btn-accion">Ver</a>
+                        <a href="#" class="btn-accion">Editar</a>
+                        <a href="#" class="btn-accion">Eliminar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2024-07-10</td>
+                    <td>Revisión de Frenos </td>
+                    <td>Pendiente</td>
+                    <td>
+                        <a href="#" class="btn-accion">Ver</a>
+                        <a href="#" class="btn-accion">Editar</a>
+                        <a href="#" class="btn-accion">Eliminar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2024-06-05</td>
+                    <td>Cambio de Neumáticos</td>
+                    <td>Completado</td>
+                    <td>
+                        <a href="#" class="btn-accion">Ver</a>
+                        <a href="#" class="btn-accion">Editar</a>
+                        <a href="#" class="btn-accion">Eliminar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2024-05-01</td>
+                    <td>Revisión General</td>
+                    <td>Completado</td>
+                    <td>
+                        <a href="#" class="btn-accion">Ver</a>
+                        <a href="#" class="btn-accion">Editar</a>
+                        <a href="#" class="btn-accion">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

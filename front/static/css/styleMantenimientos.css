@@ -1,0 +1,131 @@
+body {
+    position: relative; 
+    font-family: "SUSE", sans-serif;
+    color: #eee;
+    background: url('../images/fondoInicio.jpg') center / cover fixed;
+    min-height: 100vh;
+    margin: 0;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad aquí (0.5 es 50%) */
+    z-index: -1;
+}
+
+header {
+    color: white;
+}
+.logo {
+    width: 140px;
+    filter: drop-shadow(8px 8px 5px #fffb);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.btn-agregar {
+    background-color: rgb(74, 73, 73);
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 20px 0;
+    transition: background-color 0.3s ease;
+}
+
+.btn-agregar:hover {
+    background-color: #ee4040;
+}
+
+/* Estilo para la tabla de mantenimientos */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    box-shadow: 0px 0px 25px #000;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #666;
+}
+
+th {
+    background-color: rgb(74, 73, 73);
+    text-transform: uppercase;
+}
+
+tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-accion {
+    background-color: rgb(74, 73, 73);
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin: 0 5px;
+}
+
+.btn-accion:hover {
+    background-color: #ee4040;
+}
+
+
+select {
+    width: 20%;
+    padding: 12px 8px;
+    margin: 8px 0;
+    border: 1px solid #666;
+    border-radius: 4px;
+    background-color: rgba(15, 14, 14, 0.7);
+    color: #eee;
+    font-size: 16px;
+    box-shadow: 0px 0px 15px rgb(0, 0, 0);
+    appearance: none; /* Remueve el estilo por defecto del navegador */
+    -webkit-appearance: none; /* Remueve el estilo en navegadores WebKit */
+    -moz-appearance: none; /* Remueve el estilo en navegadores Mozilla */
+    cursor: pointer;
+}
+
+label{
+    padding-left: 20px;
+    font-size: 1.8em;
+}
+select:focus {
+    outline: none;
+    /*border-color: #ee4040; /* color al enfocar */
+}
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .btn-agregar {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}

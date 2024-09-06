@@ -105,11 +105,11 @@ def principal():
     return render_template('principal.html')
 
 @app.route('/misAutos')
-def index():
+def misAutos():
     return render_template('misAutos.html')
 
 @app.route('/mantenimientos')
-def index():
+def mantenimientos():
     return render_template('mantenimientos.html')
 
 

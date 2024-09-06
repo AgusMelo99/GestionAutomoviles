@@ -107,3 +107,35 @@ legend {
 .submit_button:hover {
     background-color: #ee4040; /* Cambia el color de fondo al pasar el mouse */
 }
+
+/* Media Queries responsive */
+@media (max-width: 768px) { /* tablets y teléfonos */
+    form {
+        width: 90%; 
+        padding: 20px; 
+    }
+
+    h2 {
+        font-size: 1.5em; 
+    }
+
+    .submit_button {
+        width: 90%;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) { /* dispositivos más pequeños */
+    form {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.2em; 
+    }
+
+    .submit_button {
+        width: 100%;
+        font-size: 12px;
+    }
+}

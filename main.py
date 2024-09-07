@@ -158,6 +158,14 @@ def agregar_mantenimiento():
     return render_template('agregar_mantenimiento.html')
 
 
+# Nueva ruta para cerrar sesión
+@app.route('/logout')
+def logout():
+    # Eliminar la información de sesión del usuario
+    session.pop('user_id', None)
+    flash('Sesión cerrada exitosamente', 'success')
+    return redirect(url_for('index'))
+
 #ejecucion de la app
 if __name__ == '__main__':
     app.run(debug=True)

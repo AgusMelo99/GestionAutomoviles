@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_bcrypt import Bcrypt
 
 from config import Config
 
@@ -8,7 +8,9 @@ from database import *
 
 #instancia de la app
 app = Flask(__name__, template_folder='front/html', static_folder='front/static')
- 
+
+flask_bcrypt = Bcrypt(app)
+
 # instancia de la base de datos
 
 db = ConexionBD(Config.MYSQL_HOST,
@@ -33,18 +35,14 @@ def inicio():
     
     email = str(request.form['email'])
     contrasena = str(request.form['contrasena'])
-
-    # Verifica si se han completado todos los campos del formulario
-    if not email or not contrasena:
-        flash('Por favor, complete todos los campos', 'error')
-        return redirect(url_for('inicio'))
     
     # Consulta el usuario en la base de datos usando el email proporcionado
     usuario = db.consultar_usuario(email)
-    print(f"Usuario encontrado: {usuario}")  # Debugging
-    
+
+    verificacion = flask_bcrypt.check_password_hash(usuario['contrasena'], contrasena)
+
     # Verificar la contraseña
-    if usuario and check_password_hash(usuario['contrasena'], contrasena):
+    if usuario and verificacion:
         # Contraseña correcta, redirigir al usuario a la página principal
         session['user_id'] = usuario['id']
         flash('Inicio de sesión exitoso', 'success')
@@ -66,7 +64,8 @@ def registro():
     nombre = str(request.form['nombre'])
     apellido = str(request.form['apellido'])
     email = str(request.form['email'])
-    contrasena = str(generate_password_hash(request.form['contrasena']))
+
+    contrasena = flask_bcrypt.generate_password_hash(request.form['contrasena']).decode("utf-8")
 
     #logica de registro
     db.crear_usuario(nombre, apellido, email, contrasena)

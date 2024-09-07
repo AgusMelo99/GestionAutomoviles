@@ -115,7 +115,47 @@ def misAutos():
 
 @app.route('/mantenimientos')
 def mantenimientos():
-    return render_template('mantenimientos.html')
+    # Conectar a la base de datos
+    db._open_connection()
+    
+    # Recuperar todos los mantenimientos de la base de datos
+    db.cur.execute("SELECT control, fecha, prox_control FROM mantenimientos")
+    mantenimientos = db.cur.fetchall()
+    
+    db._close_connection()
+
+    # Renderizar la plantilla HTML y pasar los mantenimientos como contexto
+    return render_template('mantenimientos.html', mantenimientos=mantenimientos)
+
+@app.route('/agregar_mantenimiento', methods=['GET', 'POST'])
+def agregar_mantenimiento():
+    if request.method == 'POST':
+        # Recoger los datos del formulario
+        control = request.form.get('control')
+        fecha = request.form.get('fecha')
+        prox_control = request.form.get('prox_control')
+        auto = request.form.get('auto')
+
+        # Obtener el ID del usuario desde la sesión
+        user_id = session.get('user_id')
+
+        try:
+            if user_id and control and fecha and prox_control and auto:
+                # Registrar el mantenimiento en la base de datos
+                db.cargar_mantenimiento(control, fecha, prox_control, auto)
+                flash('Mantenimiento registrado exitosamente', 'success')
+                return redirect(url_for('mantenimientos'))
+            else:
+                flash('Todos los campos son requeridos', 'error')
+                return redirect(url_for('agregar_mantenimiento'))
+        except ValueError as e:
+            flash(str(e), 'error')
+            return redirect(url_for('agregar_mantenimiento'))
+        except Exception as e:
+            flash(f'Error inesperado: {str(e)}', 'error')
+            return redirect(url_for('agregar_mantenimiento'))
+
+    return render_template('agregar_mantenimiento.html')
 
 
 #ejecucion de la app

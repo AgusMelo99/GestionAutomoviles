@@ -18,7 +18,6 @@
 
     <main>
         <div class="filtros">
-            <!-- agregar más filtros por fecha, tipo, estado, etc. -->
             <label for="filtro-tipo">Filtrar por tipo:</label>
             <select id="filtro-tipo">
                 <option value="todos">Todos</option>
@@ -28,57 +27,36 @@
             </select>
         </div>
 
+        <div class="agregar-mantenimiento">
+            <a href="{{ url_for('agregar_mantenimiento') }}" class="btn-agregar">Agregar Mantenimiento</a>
+        </div>
+
         <table>
             <thead>
                 <tr>
                     <th>Fecha</th>
-                    <th>Tipo</th>
-                    <th>Estado</th>
+                    <th>Control</th>
+                    <th>Próximo Control</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- hardcodeado tambien -->
+                {% for mantenimiento in mantenimientos %}
                 <tr>
-                    <td>2024-08-15</td>
-                    <td>Cambio de Aceite</td>
-                    <td>Completado</td>
+                    <td>{{ mantenimiento[0] }}</td> <!-- Fecha -->
+                    <td>{{ mantenimiento[1] }}</td> <!-- Control -->
+                    <td>{{ mantenimiento[2] }}</td> <!-- Próximo Control -->
                     <td>
                         <a href="#" class="btn-accion">Ver</a>
                         <a href="#" class="btn-accion">Editar</a>
                         <a href="#" class="btn-accion">Eliminar</a>
                     </td>
                 </tr>
+                {% else %}
                 <tr>
-                    <td>2024-07-10</td>
-                    <td>Revisión de Frenos </td>
-                    <td>Pendiente</td>
-                    <td>
-                        <a href="#" class="btn-accion">Ver</a>
-                        <a href="#" class="btn-accion">Editar</a>
-                        <a href="#" class="btn-accion">Eliminar</a>
-                    </td>
+                    <td colspan="4">No se encontraron mantenimientos</td>
                 </tr>
-                <tr>
-                    <td>2024-06-05</td>
-                    <td>Cambio de Neumáticos</td>
-                    <td>Completado</td>
-                    <td>
-                        <a href="#" class="btn-accion">Ver</a>
-                        <a href="#" class="btn-accion">Editar</a>
-                        <a href="#" class="btn-accion">Eliminar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2024-05-01</td>
-                    <td>Revisión General</td>
-                    <td>Completado</td>
-                    <td>
-                        <a href="#" class="btn-accion">Ver</a>
-                        <a href="#" class="btn-accion">Editar</a>
-                        <a href="#" class="btn-accion">Eliminar</a>
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </main>

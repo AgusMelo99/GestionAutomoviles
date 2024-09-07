@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styleMantenimientos.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+        <title>Mantenimientos - MAUTO</title>
+    </head>
+<body>
+    <header>
+        <a href="{{ url_for('principal') }}">
+            <img class="logo" src="../static/images/logo-home.png">
+        </a>
+    </header>
+
+    <main>
+        <h1>Agregar Mantenimiento</h1>
+        <form method="POST" action="{{ url_for('agregar_mantenimiento') }}">
+            <label for="control">Tipo de Mantenimiento:</label>
+            <select id="control" name="control">
+                <option value="aceite">Cambio de Aceite</option>
+                <option value="frenos">Revisión de Frenos</option>
+                <option value="neumaticos">Cambio de Neumáticos</option>
+            </select>
+    
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+    
+            <label for="prox_control">Próximo Control:</label>
+            <input type="date" id="prox_control" name="prox_control">
+    
+            <label for="auto">ID del Automóvil:</label>
+            <input type="number" id="auto" name="auto" required>
+    
+            <div class="form_submit">
+                <button class="submit_button" type="submit">Agregar Mantenimiento</button>
+            </div>
+        </form>
+    </main>
+    
+</body>
+</html>

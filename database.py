@@ -89,12 +89,31 @@ class ConexionBD:
         self.mydb.commit()
         self._close_connection()
 
+    def auto_existe(self, auto_id):
+        self._open_connection()
+        self.cur.execute("SELECT COUNT(*) FROM automoviles WHERE id_auto = %s", (auto_id,))
+        resultado = self.cur.fetchone()
+        self._close_connection()
+    
+        # Verifica que el resultado no sea None y que contiene datos
+        if resultado:
+            existe = resultado[0] > 0
+        else:
+            existe = False
+    
+        return existe
+
+
+
     def cargar_mantenimiento(self, control, fecha, prox_control, auto):
         self._open_connection()
-        self.cur.execute("INSERT INNTO mantenimientos(control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)",
-            (control, fecha, prox_control, auto))
+        print(f"Insertando: Control: {control}, Fecha: {fecha}, Prox_Control: {prox_control}, Auto: {auto}")
+        self.cur.execute("INSERT INTO mantenimientos(control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)",
+        (control, fecha, prox_control, auto))
         self.mydb.commit()
         self._close_connection()
+
+
 
     #metodos READ
     def consultar_usuario(self, email):

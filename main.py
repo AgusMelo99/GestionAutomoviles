@@ -106,7 +106,13 @@ def principal():
 
 @app.route('/misAutos')
 def misAutos():
-    return render_template('misAutos.html')
+    user_id = session.get('user_id')
+    if user_id:
+        autos = db.consultar_autos(user_id)
+        return render_template('misAutos.html', autos=autos)
+    else:
+        flash('Debe iniciar sesión para ver sus automóviles', 'error')
+        return redirect(url_for('inicio'))
 
 @app.route('/mantenimientos')
 def mantenimientos():

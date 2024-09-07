@@ -19,44 +19,14 @@
     <main>
         <h1>Mis autos</h1>
         <div class="autos-container">
-            <!-- tendría que haber un bucle
-             (for auto in autos) -->
+            {% for auto in autos %}
             <div class="auto-card">
-                <h2>Toyota Corolla</h2>
-                <p><strong>Patente:</strong> ABC123</p>
-                <p><strong>Año:</strong> 2018</p>
+                <h2>{{ auto.modelo }}</h2>
+                <p><strong>Patente:</strong> {{ auto.patente }}</p>
+                <p><strong>Año:</strong> {{ auto.anio }}</p>
                 <a href="{{ url_for('mantenimientos') }}" class="btn-mantenimientos">Mantenimientos</a>
             </div>
-            <!-- (end bucle) 
-             de esta manera por cada auto se generaría una tarjeta
-             lo hardcodee solo para probar -->    
-            <div class="auto-card">
-                <h2>Ford Focus</h2>
-                <p><strong>Patente:</strong> XYZ789</p>
-                <p><strong>Año:</strong> 2020</p>
-                <a href="#" class="btn-mantenimientos">Mantenimientos</a>
-            </div>
-
-            <div class="auto-card">
-                <h2>Chevrolet Cruze</h2>
-                <p><strong>Patente:</strong> LMN456</p>
-                <p><strong>Año:</strong> 2019</p>
-                <a href="#" class="btn-mantenimientos">Mantenimientos</a>
-            </div>
-
-            <div class="auto-card">
-                <h2>Honda Civic</h2>
-                <p><strong>Patente:</strong> QWE789</p>
-                <p><strong>Año:</strong> 2017</p>
-                <a href="#" class="btn-mantenimientos">Mantenimientos</a>
-            </div>
-
-            <div class="auto-card">
-                <h2>Nissan Sentra</h2>
-                <p><strong>Patente:</strong> ZXC321</p>
-                <p><strong>Año:</strong> 2021</p>
-                <a href="#" class="btn-mantenimientos">Mantenimientos</a>
-            </div>
+            {% endfor %}
         </div>
     </main>
 </body>

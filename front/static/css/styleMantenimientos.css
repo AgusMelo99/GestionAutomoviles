@@ -2,7 +2,7 @@ body {
     position: relative; 
     font-family: "SUSE", sans-serif;
     color: #eee;
-    background: url('../images/fondoInicio.jpg') center / cover fixed;
+    background: url('../images/mantenimiento.jpg') center / cover fixed;
     min-height: 100vh;
     margin: 0;
 }
@@ -48,7 +48,7 @@ h1 {
     background-color: #ee4040;
 }
 
-/* Estilo para la tabla de mantenimientos */
+
 table {
     width: 90%;
     margin: 20px auto;
@@ -98,9 +98,9 @@ select {
     color: #eee;
     font-size: 16px;
     box-shadow: 0px 0px 15px rgb(0, 0, 0);
-    appearance: none; /* Remueve el estilo por defecto del navegador */
-    -webkit-appearance: none; /* Remueve el estilo en navegadores WebKit */
-    -moz-appearance: none; /* Remueve el estilo en navegadores Mozilla */
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
     cursor: pointer;
 }
 
@@ -110,9 +110,32 @@ label{
 }
 select:focus {
     outline: none;
-    /*border-color: #ee4040; /* color al enfocar */
+ 
 }
-/* Estilos responsivos */
+
+.filtros {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+
+.btn-agregar {
+    background-color: #ee4040;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 0; 
+    transition: background-color 0.3s ease;
+}
+
+.btn-agregar:hover {
+    background-color: #cc3333; 
+}
+
 @media (max-width: 768px) {
     table {
         width: 100%;

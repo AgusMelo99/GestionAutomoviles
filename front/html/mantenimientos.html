@@ -43,9 +43,9 @@
             <tbody>
                 {% for mantenimiento in mantenimientos %}
                 <tr>
-                    <td>{{ mantenimiento[0] }}</td> <!-- Fecha -->
-                    <td>{{ mantenimiento[1] }}</td> <!-- Control -->
-                    <td>{{ mantenimiento[2] }}</td> <!-- Próximo Control -->
+                    <td>{{ mantenimiento.fecha }}</td> <!-- Fecha -->
+                    <td>{{ mantenimiento.control }}</td> <!-- Control -->
+                    <td>{{ mantenimiento.prox_control }}</td> <!-- Próximo Control -->
                     <td>
                         <a href="#" class="btn-accion">Ver</a>
                         <a href="#" class="btn-accion">Editar</a>

@@ -14,7 +14,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad aquí (0.5 es 50%) */
+    background: rgba(0, 0, 0, 0.5); 
     z-index: -1;
 }
 
@@ -110,7 +110,7 @@ label{
 }
 select:focus {
     outline: none;
- 
+   
 }
 
 .filtros {

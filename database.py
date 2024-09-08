@@ -1,5 +1,6 @@
 import mysql.connector as db
 import mysql.connector.errorcode
+import re
 
 class ConexionBD:
 
@@ -83,7 +84,21 @@ class ConexionBD:
         self._close_connection()
 
     def cargar_auto(self, modelo, patente, dueno):
+
+        if not modelo or not patente or not dueno:
+            raise ValueError("Todos los campos son requeridos")
+        
+        if not self.validar_patente(patente):
+            raise ValueError("Formato de patente inválido")
+        
+        # Validar si la patente ya existe en la base de datos
         self._open_connection()
+        self.cur.execute("SELECT COUNT(*) FROM automoviles WHERE patente = %s", (patente,))
+        resultado = self.cur.fetchone()
+        if resultado['COUNT(*)'] > 0:
+            self._close_connection()
+            raise ValueError("La patente ya está registrada")
+        
         self.cur.execute("INSERT INTO automoviles(modelo, patente, dueno) VALUES (%s, %s, %s)",
             (modelo, patente, dueno))
         self.mydb.commit()
@@ -139,3 +154,6 @@ class ConexionBD:
     
     #metodos UPDATE 
     
+    def validar_patente(self, patente):
+        # Validar formato de patente (ejemplo: ABC123 o AB123CD)
+        return re.match(r"^[A-Z]{3}[0-9]{3}$|^[A-Z]{2}[0-9]{3}[A-Z]{2}$", patente) is not None

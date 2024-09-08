@@ -6,6 +6,8 @@ from config import Config
 
 from database import *
 
+from datetime import datetime
+
 #instancia de la app
 app = Flask(__name__, template_folder='front/html', static_folder='front/static')
 
@@ -113,50 +115,49 @@ def misAutos():
         flash('Debe iniciar sesión para ver sus automóviles', 'error')
         return redirect(url_for('inicio'))
 
-@app.route('/mantenimientos')
-def mantenimientos():
+@app.route('/mantenimientos/<int:auto_id>')
+def mantenimientos(auto_id):
     # Conectar a la base de datos
-    db._open_connection()
-    
-    # Recuperar todos los mantenimientos de la base de datos
-    db.cur.execute("SELECT control, fecha, prox_control FROM mantenimientos")
-    mantenimientos = db.cur.fetchall()
-    
-    db._close_connection()
-
+    mantenimientos = db.consultar_mantenimientos(auto_id)
     # Renderizar la plantilla HTML y pasar los mantenimientos como contexto
-    return render_template('mantenimientos.html', mantenimientos=mantenimientos)
+    return render_template('mantenimientos.html', mantenimientos=mantenimientos, auto_id=auto_id)
 
-@app.route('/agregar_mantenimiento', methods=['GET', 'POST'])
-def agregar_mantenimiento():
+@app.route('/agregar_mantenimiento/<int:auto_id>', methods=['GET', 'POST'])
+def agregar_mantenimiento(auto_id):
+    user_id = session.get('user_id')
+    
+    if not user_id:
+        flash('Debe iniciar sesión para agregar un mantenimiento', 'error')
+        return redirect(url_for('inicio'))
+    
     if request.method == 'POST':
-        # Recoger los datos del formulario
         control = request.form.get('control')
         fecha = request.form.get('fecha')
         prox_control = request.form.get('prox_control')
-        auto = request.form.get('auto')
-
-        # Obtener el ID del usuario desde la sesión
-        user_id = session.get('user_id')
 
         try:
-            if user_id and control and fecha and prox_control and auto:
-                # Registrar el mantenimiento en la base de datos
-                db.cargar_mantenimiento(control, fecha, prox_control, auto)
+            if control and fecha and prox_control:
+                fecha = datetime.strptime(fecha, '%Y-%m-%d')
+                prox_control = datetime.strptime(prox_control, '%Y-%m-%d')
+    
+                if prox_control < fecha:
+                    flash('La fecha del próximo control no puede ser anterior a la fecha actual', 'error')
+                    return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
+                # Usar auto_id pasado en la URL
+                db.cargar_mantenimiento(control, fecha, prox_control, auto_id)
                 flash('Mantenimiento registrado exitosamente', 'success')
-                return redirect(url_for('mantenimientos'))
+                return redirect(url_for('mantenimientos',auto_id=auto_id))
             else:
                 flash('Todos los campos son requeridos', 'error')
-                return redirect(url_for('agregar_mantenimiento'))
+                return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
         except ValueError as e:
             flash(str(e), 'error')
-            return redirect(url_for('agregar_mantenimiento'))
+            return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
         except Exception as e:
             flash(f'Error inesperado: {str(e)}', 'error')
-            return redirect(url_for('agregar_mantenimiento'))
-
-    return render_template('agregar_mantenimiento.html')
-
+            return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
+    
+    return render_template('agregar_mantenimiento.html', auto_id=auto_id)
 
 # Nueva ruta para cerrar sesión
 @app.route('/logout')

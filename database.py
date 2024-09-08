@@ -107,9 +107,9 @@ class ConexionBD:
 
     def cargar_mantenimiento(self, control, fecha, prox_control, auto):
         self._open_connection()
-        print(f"Insertando: Control: {control}, Fecha: {fecha}, Prox_Control: {prox_control}, Auto: {auto}")
-        self.cur.execute("INSERT INTO mantenimientos(control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)",
-        (control, fecha, prox_control, auto))
+        query = 'INSERT INTO mantenimientos (control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)'
+        
+        self.cur.execute(query, (control, fecha, prox_control, auto))
         self.mydb.commit()
         self._close_connection()
 
@@ -130,7 +130,7 @@ class ConexionBD:
         self._close_connection()
         return result
     
-    def consultar_controles(self, auto):
+    def consultar_mantenimientos(self, auto):
         self._open_connection()
         self.cur.execute('SELECT * FROM mantenimientos WHERE auto = %s', (auto,))
         result = self.cur.fetchall()

@@ -18,23 +18,23 @@
 
     <main>
         <h1>Agregar Mantenimiento</h1>
-        <form method="POST" action="{{ url_for('agregar_mantenimiento') }}">
+        <form method="POST" action="{{ url_for('agregar_mantenimiento', auto_id=auto_id) }}">
             <label for="control">Tipo de Mantenimiento:</label>
             <select id="control" name="control">
                 <option value="aceite">Cambio de Aceite</option>
                 <option value="frenos">Revisión de Frenos</option>
                 <option value="neumaticos">Cambio de Neumáticos</option>
             </select>
-    
+
             <label for="fecha">Fecha:</label>
             <input type="date" id="fecha" name="fecha" required>
-    
+
             <label for="prox_control">Próximo Control:</label>
             <input type="date" id="prox_control" name="prox_control">
-    
-            <label for="auto">ID del Automóvil:</label>
-            <input type="number" id="auto" name="auto" required>
-    
+
+            <!-- Campo oculto para el ID del automóvil -->
+            <input type="hidden" name="auto_id" value="{{ auto_id }}">
+
             <div class="form_submit">
                 <button class="submit_button" type="submit">Agregar Mantenimiento</button>
             </div>

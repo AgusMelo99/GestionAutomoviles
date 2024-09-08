@@ -24,7 +24,7 @@
                 <h2>{{ auto.modelo }}</h2>
                 <p><strong>Patente:</strong> {{ auto.patente }}</p>
                 <p><strong>Año:</strong> {{ auto.anio }}</p>
-                <a href="{{ url_for('mantenimientos') }}" class="btn-mantenimientos">Mantenimientos</a>
+                <a href="{{ url_for('mantenimientos', auto_id=auto['id_auto']) }}" class="btn-mantenimientos">Mantenimientos</a>
             </div>
             {% endfor %}
         </div>

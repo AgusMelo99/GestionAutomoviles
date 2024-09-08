@@ -122,8 +122,8 @@ def mantenimientos(auto_id):
     # Renderizar la plantilla HTML y pasar los mantenimientos como contexto
     return render_template('mantenimientos.html', mantenimientos=mantenimientos, auto_id=auto_id)
 
-@app.route('/agregarMantenimiento/<int:auto_id>', methods=['GET', 'POST'])
-def agregarMantenimiento(auto_id):
+@app.route('/agregar_mantenimiento/<int:auto_id>', methods=['GET', 'POST'])
+def agregar_mantenimiento(auto_id):
     user_id = session.get('user_id')
     
     if not user_id:
@@ -142,22 +142,22 @@ def agregarMantenimiento(auto_id):
     
                 if prox_control < fecha:
                     flash('La fecha del próximo control no puede ser anterior a la fecha actual', 'error')
-                    return redirect(url_for('agregarMantenimiento', auto_id=auto_id))
+                    return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
                 # Usar auto_id pasado en la URL
                 db.cargar_mantenimiento(control, fecha, prox_control, auto_id)
                 flash('Mantenimiento registrado exitosamente', 'success')
                 return redirect(url_for('mantenimientos',auto_id=auto_id))
             else:
                 flash('Todos los campos son requeridos', 'error')
-                return redirect(url_for('agregarMantenimiento', auto_id=auto_id))
+                return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
         except ValueError as e:
             flash(str(e), 'error')
-            return redirect(url_for('agregarMantenimiento', auto_id=auto_id))
+            return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
         except Exception as e:
             flash(f'Error inesperado: {str(e)}', 'error')
-            return redirect(url_for('agregarMantenimiento', auto_id=auto_id))
+            return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
     
-    return render_template('agregarMantenimiento.html', auto_id=auto_id)
+    return render_template('agregar_mantenimiento.html', auto_id=auto_id)
 
 # Nueva ruta para cerrar sesión
 @app.route('/logout')

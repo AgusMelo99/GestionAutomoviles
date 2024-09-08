@@ -1,12 +1,11 @@
 /* Estilo general */
 body {
-    position: relative;
+    position: relative; 
     font-family: "SUSE", sans-serif;
     color: #eee;
     background: url('../images/fondoRegistro.jpg') center / cover fixed;
     min-height: 100vh;
     margin: 0;
-    padding: 0;
 }
 
 body::before {
@@ -20,10 +19,6 @@ body::before {
     z-index: -1; /* Coloca la capa por detrás del contenido */
 }
 
-header {
-    text-align: center;
-    padding: 20px;
-}
 
 .logo {
     width: 140px;
@@ -37,7 +32,7 @@ main {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0px 0px 25px #000;
+    box-shadow: 0px 0px 55px #fff2;
     text-align: center;
 }
 
@@ -58,15 +53,22 @@ label {
 
 select,
 input[type="date"] {
-    width: 100%;
+    width: calc(100% - 20px); 
     padding: 12px;
     margin-bottom: 20px;
     border: 1px solid #666;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.1); 
     color: #eee;
     border-radius: 4px;
     font-size: 1em;
     box-shadow: 0px 0px 15px rgb(0, 0, 0);
+    -webkit-appearance: none; 
+    appearance: none; 
+}
+
+select option {
+    background-color: #333; 
+    color: #eee; 
 }
 
 select:focus,
@@ -74,6 +76,11 @@ input[type="date"]:focus {
     outline: none;
     border-color: #ee4040;
     box-shadow: 0 0 10px #ee4040;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); 
+    cursor: pointer;
 }
 
 .form_submit {
@@ -98,7 +105,7 @@ input[type="date"]:focus {
     background-color: #ee4040; 
 }
 
-
+/* Estilos responsivos */
 @media (max-width: 768px) {
     main {
         width: 90%;

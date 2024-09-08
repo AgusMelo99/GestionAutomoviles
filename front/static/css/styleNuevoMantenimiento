@@ -1,0 +1,124 @@
+/* Estilo general */
+body {
+    position: relative;
+    font-family: "SUSE", sans-serif;
+    color: #eee;
+    background: url('../images/fondoRegistro.jpg') center / cover fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad del fondo */
+    z-index: -1; /* Coloca la capa por detrás del contenido */
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+.logo {
+    width: 140px;
+    filter: drop-shadow(8px 8px 5px white);
+}
+
+main {
+    color: white;
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 25px #000;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px black;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin: 15px 0 5px;
+    font-size: 1.1em;
+}
+
+select,
+input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #666;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #eee;
+    border-radius: 4px;
+    font-size: 1em;
+    box-shadow: 0px 0px 15px rgb(0, 0, 0);
+}
+
+select:focus,
+input[type="date"]:focus {
+    outline: none;
+    border-color: #ee4040;
+    box-shadow: 0 0 10px #ee4040;
+}
+
+.form_submit {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.submit_button {
+    width: 200px;
+    height: 50px;
+    background-color: rgb(74, 73, 73);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'SUSE', sans-serif;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit_button:hover {
+    background-color: #ee4040; 
+}
+
+@media (max-width: 768px) {
+    main {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .submit_button {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    label {
+        font-size: 1em;
+    }
+
+    .submit_button {
+        font-size: 1em;
+    }
+}

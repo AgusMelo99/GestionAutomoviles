@@ -19,7 +19,8 @@ db = ConexionBD(Config.MYSQL_HOST,
                 Config.MYSQL_PORT,
                 Config.MYSQL_USER,
                 Config.MYSQL_PASSWORD,
-                Config.MYSQL_DB)
+                Config.MYSQL_DB,
+                flask_bcrypt)
 
 # Configurar la clave secreta
 app.config['SECRET_KEY'] = Config.SECRET_KEY
@@ -66,9 +67,8 @@ def registro():
     nombre = str(request.form['nombre'])
     apellido = str(request.form['apellido'])
     email = str(request.form['email'])
-
-    contrasena = flask_bcrypt.generate_password_hash(request.form['contrasena']).decode("utf-8")
-
+    contrasena = request.form['contrasena']
+    
     #logica de registro
     db.crear_usuario(nombre, apellido, email, contrasena)
 

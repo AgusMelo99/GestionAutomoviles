@@ -2,15 +2,17 @@ import mysql.connector as db
 import mysql.connector.errorcode
 import re
 
+
 class ConexionBD:
 
-    def __init__(self, host, port, user, password, database):
+    def __init__(self, host, port, user, password, database, bcrypt):
 
         self.host = host
         self.port = port
         self.user = user
         self.password = password
         self.database = database
+        self.bcrypt = bcrypt
         
         self.mydb = db.connect(host= self.host, port= self.port, user=self.user, password=self.password)
         self.cur = self.mydb.cursor()
@@ -77,9 +79,31 @@ class ConexionBD:
 
     #metodos CREATE
     def crear_usuario(self, nombre, apellido, email, contrasena):
+
+        if not self.validar_nombre_apellido(nombre):
+            raise ValueError("El nombre solo debe contener letras y espacios")
+        
+        if not self.validar_nombre_apellido(apellido):
+            raise ValueError("El apellido solo debe contener letras y espacios")
+
+        if not self.validar_email(email):
+            raise ValueError("Email inválido")
+        
+        if not self.validar_contrasena(contrasena):
+            raise ValueError("La contraseña debe tener al menos 8 caracteres, incluyendo letras y números")
+        
+        # Validar si el email ya está registrado
         self._open_connection()
+        self.cur.execute("SELECT COUNT(*) FROM usuarios WHERE email = %s", (email,))
+        resultado = self.cur.fetchone()
+        if resultado['COUNT(*)'] > 0:
+            self._close_connection()
+            raise ValueError("El email ya está registrado")
+        
+        contrasena_hash = self.bcrypt.generate_password_hash(contrasena).decode('utf-8')  # Generar hash de la contraseña
+        
         self.cur.execute("INSERT INTO usuarios(nombre, apellido, email, contrasena) VALUES (%s, %s, %s, %s)", 
-            (nombre, apellido, email, contrasena))
+            (nombre, apellido, email, contrasena_hash))
         self.mydb.commit()
         self._close_connection()
 
@@ -157,3 +181,15 @@ class ConexionBD:
     def validar_patente(self, patente):
         # Validar formato de patente (ejemplo: ABC123 o AB123CD)
         return re.match(r"^[A-Z]{3}[0-9]{3}$|^[A-Z]{2}[0-9]{3}[A-Z]{2}$", patente) is not None
+
+    def validar_email(self, email):
+        # Validar formato de email
+        return re.match(r"[^@]+@[^@]+\.[^@]+", email) is not None
+
+    def validar_nombre_apellido(self, nombre_apellido):
+        # Validar que solo contenga letras y espacios
+        return re.match(r"^[a-zA-Z\s]+$", nombre_apellido) is not None
+
+    def validar_contrasena(self, contrasena):
+        # Validar que la contraseña tenga al menos 8 caracteres, incluyendo letras y números
+        return re.match(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", contrasena) is not None

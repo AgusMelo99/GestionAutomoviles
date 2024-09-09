@@ -35,16 +35,21 @@ h1 {
 
 .filtros {
     display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 0 20px;
+    align-items: center; /* Alinea verticalmente los elementos */
+    justify-content: space-between; /* Separa el filtro del botón */
     margin-bottom: 20px;
+    padding: 0 20px;
 }
 
-.agregar-mantenimiento {
-    display: flex;
-    justify-content: flex-end; 
-    padding: 0 20px;
+.filtros label {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.filtros select {
+    width: auto;
+    padding: 10px;
+    margin-right: auto; /* Deja el espacio entre el select y el botón */
 }
 
 .btn-agregar {

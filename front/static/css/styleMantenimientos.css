@@ -67,7 +67,7 @@ h1 {
     border-radius: 4px;
     transition: background-color 0.3s ease;
     position: absolute; /* Posición absoluta para el botón */
-    right: 60px; /* Ajusta la posición desde la derecha */
+    right: 70px; /* Ajusta la posición desde la derecha */
     top: 110px; /* Ajusta la posición desde la parte superior */
 }
 

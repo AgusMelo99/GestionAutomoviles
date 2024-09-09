@@ -1,7 +1,7 @@
 import mysql.connector as db
 import mysql.connector.errorcode
 import re
-
+from datetime import datetime
 
 class ConexionBD:
 
@@ -145,9 +145,20 @@ class ConexionBD:
 
 
     def cargar_mantenimiento(self, control, fecha, prox_control, auto):
+        if not control or not fecha or not prox_control or not auto:
+            raise ValueError("Todos los campos son requeridos")
+        
+        try:
+            fecha_dt = datetime.strptime(fecha, '%Y-%m-%d')
+            prox_control_dt = datetime.strptime(prox_control, '%Y-%m-%d')
+        except ValueError:
+            raise ValueError("Formato de fecha inválido")
+    
+        if prox_control_dt < fecha_dt:
+            raise ValueError("La fecha del próximo control no puede ser anterior a la fecha actual")
+        
         self._open_connection()
         query = 'INSERT INTO mantenimientos (control, fecha, prox_control, auto) VALUES (%s, %s, %s, %s)'
-        
         self.cur.execute(query, (control, fecha, prox_control, auto))
         self.mydb.commit()
         self._close_connection()

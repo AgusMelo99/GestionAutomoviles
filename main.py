@@ -136,20 +136,10 @@ def agregar_mantenimiento(auto_id):
         prox_control = request.form.get('prox_control')
 
         try:
-            if control and fecha and prox_control:
-                fecha = datetime.strptime(fecha, '%Y-%m-%d')
-                prox_control = datetime.strptime(prox_control, '%Y-%m-%d')
-    
-                if prox_control < fecha:
-                    flash('La fecha del próximo control no puede ser anterior a la fecha actual', 'error')
-                    return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
-                # Usar auto_id pasado en la URL
-                db.cargar_mantenimiento(control, fecha, prox_control, auto_id)
-                flash('Mantenimiento registrado exitosamente', 'success')
-                return redirect(url_for('mantenimientos',auto_id=auto_id))
-            else:
-                flash('Todos los campos son requeridos', 'error')
-                return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))
+            db.cargar_mantenimiento(control, fecha, prox_control, auto_id)
+            flash('Mantenimiento registrado exitosamente', 'success')
+            return redirect(url_for('mantenimientos',auto_id=auto_id))
+        
         except ValueError as e:
             flash(str(e), 'error')
             return redirect(url_for('agregar_mantenimiento', auto_id=auto_id))

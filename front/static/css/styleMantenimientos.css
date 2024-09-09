@@ -68,7 +68,7 @@ h1 {
     transition: background-color 0.3s ease;
     position: absolute; /* Posición absoluta para el botón */
     right: 20px; /* Ajusta la posición desde la derecha */
-    top: 90px; /* Ajusta la posición desde la parte superior */
+    top: 120px; /* Ajusta la posición desde la parte superior */
 }
 
 .btn-agregar:hover {

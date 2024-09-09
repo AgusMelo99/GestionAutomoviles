@@ -1,3 +1,4 @@
+console.log('JavaScript de validación cargado correctamente');
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form'); // Asegúrate de seleccionar el formulario correcto
     if (form) {

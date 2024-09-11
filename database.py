@@ -37,15 +37,19 @@ class ConexionBD:
         
         self.mydb.commit()
 
-        #creamos la table de autos
-        self.cur.execute('''CREATE TABLE IF NOT EXISTS automoviles(
+        self.cur.execute('''
+        CREATE TABLE IF NOT EXISTS automoviles(
             id_auto INT AUTO_INCREMENT PRIMARY KEY,
+            marca VARCHAR(30) NOT NULL,
             modelo VARCHAR(30) NOT NULL,
+            año INT NOT NULL,
             patente VARCHAR(10) NOT NULL,
+            kilometraje INT NOT NULL,
+            combustible VARCHAR(20) NOT NULL,
             dueno INT NOT NULL,
             FOREIGN KEY (dueno) REFERENCES usuarios(id)
-            )''')
-        
+        )
+        ''')
         self.mydb.commit()
 
         #creamos la tabla de mantenimientos
@@ -107,14 +111,13 @@ class ConexionBD:
         self.mydb.commit()
         self._close_connection()
 
-    def cargar_auto(self, modelo, patente, dueno):
-
-        if not modelo or not patente or not dueno:
+    def cargar_auto(self, marca, modelo, año, patente, kilometraje, combustible, dueno):
+        if not marca or not modelo or not año or not patente or not kilometraje or not combustible or not dueno:
             raise ValueError("Todos los campos son requeridos")
-        
+    
         if not self.validar_patente(patente):
             raise ValueError("Formato de patente inválido")
-        
+    
         # Validar si la patente ya existe en la base de datos
         self._open_connection()
         self.cur.execute("SELECT COUNT(*) FROM automoviles WHERE patente = %s", (patente,))
@@ -122,9 +125,9 @@ class ConexionBD:
         if resultado['COUNT(*)'] > 0:
             self._close_connection()
             raise ValueError("La patente ya está registrada")
-        
-        self.cur.execute("INSERT INTO automoviles(modelo, patente, dueno) VALUES (%s, %s, %s)",
-            (modelo, patente, dueno))
+    
+        self.cur.execute("INSERT INTO automoviles(marca, modelo, año, patente, kilometraje, combustible, dueno) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            (marca, modelo, año, patente, kilometraje, combustible, dueno))
         self.mydb.commit()
         self._close_connection()
 

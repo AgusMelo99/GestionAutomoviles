@@ -21,7 +21,8 @@
         <div class="autos-container">
             {% for auto in autos %}
             <div class="auto-card">
-                <h2>{{ auto.modelo }}</h2>
+                <h2>{{ auto.marca }}</h2>
+                <p><strong>Modelo:</strong> {{ auto.modelo }}</p>
                 <p><strong>Patente:</strong> {{ auto.patente }}</p>
                 <p><strong>Año:</strong> {{ auto.anio }}</p>
                 <a href="{{ url_for('mantenimientos', auto_id=auto['id_auto']) }}" class="btn-mantenimientos">Mantenimientos</a>

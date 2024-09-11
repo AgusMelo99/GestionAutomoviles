@@ -26,26 +26,27 @@ body::before {
 main {
     color: white;
     display: flex; /* Para colocar el menú lateral al lado del contenido */
+    flex-wrap: wrap; /* Para que los elementos se ajusten en pantallas pequeñas */
 }
 
 /* Estilo para el contenido principal */
 .main-content {
     flex: 1; /* Ocupa todo el espacio disponible */
     padding: 20px;
+    min-width: 300px; /* Asegura que el contenido no sea demasiado estrecho */
 }
 
 /* Menú lateral */
 .side-menu {
     position: absolute;
     top: 15px;
-    right: 20px; /* Alinea el menú a la derecha */
+    right: 20px;
     width: 200px;
     background-color: #333;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
-
 
 .side-menu ul {
     list-style: none;
@@ -89,6 +90,7 @@ h2 {
     bottom: 0;
     width: 100%;
 }
+
 .flashes {
     list-style-type: none;
     padding: 0;
@@ -115,32 +117,46 @@ h2 {
 
 /* Media Queries responsive */
 @media (max-width: 768px) { /* tablets y teléfonos */
-    form {
-        width: 90%; 
-        padding: 20px; 
+    main {
+        flex-direction: column; /* Cambia a columna en pantallas más pequeñas */
+        align-items: center; /* Centra el contenido */
+    }
+
+    .side-menu {
+        position: relative; /* Cambia a relativo para dispositivos más pequeños */
+        width: 100%; /* Ocupa todo el ancho disponible */
+        margin: 0 0 20px; /* Añade un margen inferior */
+    }
+
+    .main-content {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        padding: 10px; /* Reduce el padding */
     }
 
     h2 {
-        font-size: 1.5em; 
-    }
-
-    .submit_button {
-        width: 90%;
-        font-size: 14px;
+        font-size: 1.5em; /* Ajusta el tamaño del encabezado */
     }
 }
 
 @media (max-width: 480px) { /* dispositivos más pequeños */
-    form {
-        padding: 15px;
+    .logo {
+        width: 100px; /* Ajusta el tamaño del logo */
     }
 
     h2 {
-        font-size: 1.2em; 
+        font-size: 1.2em; /* Más pequeño para móviles */
     }
 
-    .submit_button {
-        width: 100%;
-        font-size: 12px;
+    .side-menu {
+        padding: 10px; /* Reduce el padding del menú */
+    }
+
+    .side-menu a {
+        font-size: 16px; /* Ajusta el tamaño de fuente para enlaces del menú */
+        padding: 8px; /* Ajusta el padding */
+    }
+
+    .main-content {
+        padding: 5px; /* Reduce aún más el padding */
     }
 }

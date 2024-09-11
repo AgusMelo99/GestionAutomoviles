@@ -21,51 +21,39 @@ body::before {
 
 header {
     color: white;
+    text-align: center; /* Asegura que el logo esté centrado */
+    padding: 10px 0; /* Añade un poco de espacio */
 }
 
- h1 {
+h1 {
     text-align: center;
-    margin: 0;
-    font-size: 2.5em;
+    margin: 10px 0;
+    font-size: 2em; /* Ajusta el tamaño para que no sea demasiado grande */
     text-transform: uppercase;
     font-weight: 700;
 }
+
 .logo {
-    width: 140px;
+    width: 120px; /* Ajusta el tamaño del logo */
     filter: drop-shadow(8px 8px 5px #fffb);
 }
 
-.btn-ver-todos {
-    background-color: rgb(74, 73, 73);
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 4px;
-    display: inline-block;
-    margin: 20px 0;
-    transition: background-color 0.3s ease;
-}
-
-.btn-ver-todos:hover {
-    background-color: #ee4040;
-}
-
-/* donde van las tarjetas de autos(todavia no usado) */
 .autos-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px; /* espacio entre tarjetas */
+    gap: 20px; /* Espacio entre tarjetas */
     padding: 20px;
 }
 
-/* tarjetas de autos */
+/* Tarjetas de autos */
 .auto-card {
     background-color: rgba(0, 0, 0, 0.6); 
     border: 1px solid #666;
     border-radius: 8px;
     box-shadow: 0px 0px 25px #000;
-    width: 330px; /* Ancho de la tarjeta */
+    flex: 1 1 300px; /* Flexibilidad para adaptarse a diferentes tamaños */
+    max-width: 330px; /* Ancho máximo de la tarjeta */
     padding: 20px;
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -117,18 +105,22 @@ header {
     }
 
     .auto-card {
-        width: 100%; /* Ocupa todo el ancho disponible en pantallas pequeñas */
+        flex: 1 1 100%; /* Ocupa todo el ancho disponible en pantallas medianas */
+        max-width: 100%; /* Asegura que las tarjetas se ajusten al ancho del contenedor */
+    }
+
+    h1 {
+        font-size: 1.8em; /* Ajusta el tamaño del encabezado */
     }
 }
 
 @media (max-width: 480px) {
     header h1 {
-        font-size: 1.8em;
+        font-size: 1.5em; /* Ajusta el tamaño del encabezado para móviles */
     }
 
-    .btn-ver-todos {
-        padding: 8px 15px;
-        font-size: 0.9em;
+    .logo {
+        width: 100px; /* Ajusta el tamaño del logo */
     }
 
     .auto-card {
@@ -137,5 +129,10 @@ header {
 
     .auto-card h2 {
         font-size: 1.3em;
+    }
+
+    .btn-mantenimientos {
+        padding: 8px 12px;
+        font-size: 0.9em;
     }
 }

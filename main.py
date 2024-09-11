@@ -42,10 +42,6 @@ def inicio():
     # Consulta el usuario en la base de datos usando el email proporcionado
     usuario = db.consultar_usuario(email)
 
-    # Verificar si el usuario existe antes de intentar acceder a sus atributos
-    if usuario is None:
-        flash('Email o contraseña incorrectos', 'error')
-        return redirect(url_for('inicio'))
 
     verificacion = flask_bcrypt.check_password_hash(usuario['contrasena'], contrasena)
 

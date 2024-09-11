@@ -39,9 +39,9 @@ class ConexionBD:
 
         #creamos la table de autos
         self.cur.execute('''CREATE TABLE IF NOT EXISTS automoviles(
-            id_auto INT AUTO_INCREMENT PRIMARY KEY,
+            id_auto INT AUTO_INCREMENT PRIMARY KEY, marca VARCHAR(30) NOT NULL,
             modelo VARCHAR(30) NOT NULL,
-            patente VARCHAR(10) NOT NULL,
+            patente VARCHAR(10) NOT NULL,anio VARCHAR(10) NOT NULL
             dueno INT NOT NULL,
             FOREIGN KEY (dueno) REFERENCES usuarios(id)
             )''')

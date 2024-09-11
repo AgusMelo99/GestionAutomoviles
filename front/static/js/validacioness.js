@@ -23,12 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 esValido = false;
             }
 
-            // Validar VIN (Número de Identificación del Vehículo)
-            if (!validarVIN(vin)) {
-                alert('El VIN debe tener 17 caracteres alfanuméricos.');
-                esValido = false;
-            }
-
             // Validar patente (opcional, si el campo está presente)
             if (patente && !validarPatente(patente)) {
                 alert('Formato de patente inválido: debe ser ABC123 o AB123CD.');

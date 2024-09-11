@@ -92,7 +92,7 @@ def agregarAutomovil():
         
         if user_id:
             # Lógica de registro
-            db.cargar_auto(modelo, vin, user_id)
+            db.cargar_auto(marca, modelo, anio, vin, kilometraje, combustible, user_id)
             flash('Automóvil registrado exitosamente', 'success')
         else:
             flash('Debe iniciar sesión para registrar un automóvil', 'error')

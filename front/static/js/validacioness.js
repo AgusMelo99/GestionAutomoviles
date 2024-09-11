@@ -36,11 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Función para validar VIN
-function validarVIN(vin) {
-    const regex = /^[A-HJ-NPR-Z0-9]{17}$/;  // Excluye las letras I, O, Q por similitud con números
-    return regex.test(vin);
-}
 
 // Función para validar patente
 function validarPatente(patente) {

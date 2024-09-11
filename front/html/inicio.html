@@ -18,15 +18,6 @@
     </header>
     
     <main>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul class="flashes">
-            {% for category, message in messages %}
-                <li class="{{ category }}">{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
             <form action="{{ url_for('inicio') }}" method="post">
             <h2>Inicie sesion</h2>
     
@@ -47,13 +38,5 @@
                 </div>
             </form>
         </main>
-        <script>
-            setTimeout(function() {
-                var flashes = document.querySelector('.flashes');
-                if (flashes) {
-                    flashes.style.display = 'none';
-                }
-            }, 5000); // 5 segundos
-        </script>
     </body>
     </html>
